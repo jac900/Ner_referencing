@@ -1,9 +1,9 @@
 {
   "version": 2,
   "builds": [
-    { "src": "ner.py", "use": "@vercel/python" }
+    { "src": "NER.py", "use": "@vercel/python" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/ner.py" }
+    { "src": "/(.*)", "dest": "/NER.py" }
   ]
 }
