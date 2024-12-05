@@ -1,4 +1,0 @@
-Python==3.12
-Numpy==1.26.4
-Spacy==3.7.5
-Flask==2.2.5
