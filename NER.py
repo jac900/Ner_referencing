@@ -30,7 +30,7 @@ def predict():
 	
     #print(references)
     # load model
-    nlp = spacy.load("en_nerref_pipeline")
+    nlp = spacy.load("en_nerref_pipeline-1.0.0")
 
     rows = []
 
