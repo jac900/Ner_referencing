@@ -1,4 +1,3 @@
 Numpy==1.26.4
 Spacy==3.7.5
 Flask==2.2.5
-python-csv==0.0.13
