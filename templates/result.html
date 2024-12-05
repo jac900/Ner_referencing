@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>NER References</title>
+	
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link href="{{url_for('static', filename='css/bootstrapw.css') }}" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<script>
+		const result = {{ model_output|tojson }};
+		console.log(result.length);
+		
+		window.onload = function() {
+			var x = document.getElementById("choose");
+			if (result.length > 1) { 
+				for (let i = 1; i < result.length; i++) {
+					var option = document.createElement("option");
+					option.text = i.toString();
+					option.value = i.toString();
+					x.add(option);
+				}
+			}
+		};
+	</script>
+	<script>	
+		var out_list = {{ model_output|tojson }};
+		var base_list = {{ model_input|tojson }};
+		
+		// Event listener
+		$(document).ready(function() {
+			$("#choose").change(function() {
+				var ref_list = [];
+				
+				// Save changes to table
+				for (let i = 0; i < 53; i++) {
+					var d = document.getElementById(i.toString()).value;
+					ref_list.push(d);
+				}
+
+				var id = document.getElementById("0").value;
+				out_list[parseInt(id)] = ref_list;
+				
+				// Insert chosen reference
+				var ref = parseInt($(this).val());
+				for (let i = 0; i < 53; i++) {
+					document.getElementById(i.toString()).value = out_list[ref][i];
+				document.getElementById("tb").value = base_list[ref];
+				}
+			});
+		});
+	
+	</script>
+	<script>
+		function saveFunc() {
+	
+			var ref_list = [];
+			
+			// Save changes to table
+			for (let i = 0; i < 53; i++) {
+				var d = document.getElementById(i.toString()).value;
+				ref_list.push(d);
+			}
+
+			var id = document.getElementById("0").value;
+			out_list[parseInt(id)] = ref_list;
+			
+			document.getElementById("save_re").value = JSON.stringify(Object.assign({}, out_list));
+			
+			var x=$(".box").is(":checked");
+			document.getElementById("hid").value = JSON.stringify(x);
+    }
+		
+	</script>
+	
+	<style type="text/css">
+	</style>
+	
+</head>
+
+<body>
+    <div class="container">
+		<div style="height: 167px;" class="row bannière-fond" id="Bannière">
+			<div style="height: 170px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="Texte">
+				<h3 style="color: white; font-family: Papyrus;" class="texte-bannière"><big>WhirlWriter</big></h3>
+				<p class="texte-bannière-p"><big><span style="color: white; font-family: Papyrus;">The Paper Writer Framework</span></big><br></p>
+			</div>
+		</div>
+		<div style="" class="navbar-default">
+			<button class="button" onclick=""><a class="navbar-brand" href="C:/Users/chrom/Documents/11-WhirlWriter/Website/default_index.html"><img src="{{url_for ('static', filename='./img/logo.png') }}" alt="Logo" class="vcenter" width="20"></a> 
+			</button>
+		</div>
+		<div>
+			<h1>Named Entity Recognition model <br>for the processing of scientific references.</h1><br>
+            <p><i>In the drop down menu Choose Reference you can choose the reference to correct. It is automatically saved when you move to another reference. When you have corrected all the references, press the button Save all References to save the elements to a csv-file. Do not forget to make choices in the drop down menus for Type of Publication, etc. which cannot be predicted.</i></p>
+		</div>
+		<br>
+        <div class="ice">
+            
+            <form id="save-form" class="save-form" action="{{ url_for('save_pred')}}" method="post" onsubmit="return saveFunc()">
+			<table class="table" cellspacing="0" cellpadding="0">
+			
+				<tr cellspacing="0" cellpadding="0">
+					<th cellspacing="0" cellpadding="0"><label for="choose">Choose Reference:</label>
+						<select id="choose" name="choose" class="select">
+							<option value="0">0</option>
+						</select></th><br>
+				</tr>
+				<tr cellspacing="0" cellpadding="0">
+					<th colspan="5" cellspacing="0" cellpadding="0"><label for="tb">Text Base:</label><br>	
+						<input type="text" class="tb" id="tb" name="tb" value="{{ model_input[0] }}" readonly="readonly"</th>
+				</tr>
+				<tr>
+					<th><label for="id">Id:</label><br>	
+				        <input type="text" id="0" name="id" value="{{ model_output[0][0] }}" readonly="readonly"</th>
+					<th><label for="pubtype">Publication Type:</label>
+						<select id="1" name="pubtype" class="select">
+						  <option value="0">Authored Book</option>
+						  <option value="1">Edited Book</option>
+						  <option value="2">Chapter Authored Book</option>
+						  <option value="3">Chapter Edited Book</option>
+						  <option value="4">Conference Proceedings</option>
+						  <option value="5">Contribution Conference Proceedings</option>
+						  <option value="6">Thesis/Dissertation/Habilitation</option>
+						  <option value="7">Unpublished Thesis ...</option>
+						  <option value="8">Entry Reference Work</option>
+						  <option value="9">Whole Journal</option>
+						  <option value="10">Article Journal</option>
+						  <option value="11">Special Issue</option>
+						  <option value="12">Article Special Issue</option>
+						  <option value="13">Article Newspaper</option>
+						  <option value="14">Review Journal</option>
+						  <option value="15">Review Newspaper</option>
+						  <option value="16">Interview</option>
+						  <option value="17">Manuscript Collection</option>
+						  <option value="18">Unpublished Material</option>
+						  <option value="19">Lecture, Workpaper</option>
+						  <option value="20">Patent</option>
+						  <option value="21">Audio Visual not Online</option>
+						  <option value="22">TV and Radio</option>
+						  <option value="23">Online Multimedia</option>
+						  <option value="24">Artwork in Museum</option>
+						  <option value="25">Wikipedia</option>
+						  <option value="26">Social Media</option>
+						  <option value="27">Forum and Blogs</option>
+						  <option value="28">Websites and Webpages</option>
+						  <option value="29">Database and Datasets</option>
+						  <option value="30">Games and apps</option>
+						  <option value="31">Legal Material</option>
+						</select></th>
+					<th><label for="fname">Title:</label><br>
+  <input type="text" id="2" name="fname" value="{{ model_output[0][2] }}" maxlength="500"</th>
+					<th><label for="fname">Short Title:</label><br>
+  <input type="text" id="3" name="fname" value="{{ model_output[0][3] }}" maxlength="50"</th>
+					<th><label for="fname">Author Name:</label><br>
+  <input type="text" id="4" name="fname" value="{{ model_output[0][4] }}" maxlength="100"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Author First Name:</label><br>
+  <input type="text" id="5" name="fname" value="{{ model_output[0][5] }}" maxlength="100"</th>
+					<td><label for="fname">Publication Name:</label><br>
+  <input type="text" id="6" name="fname" value="{{ model_output[0][6] }}" maxlength="500"</th>
+					<td><label for="fname">Publiation Year:</label><br>
+  <input type="text" id="7" name="fname" value="{{ model_output[0][7] }}" maxlength="10"</th>
+					<th><label for="fname">First Year of Publication:</label><br>
+  <input type="text" id="8" name="fname" value="{{ model_output[0][8] }}" maxlength="10"</th>
+					<th><label for="fname">Month:</label><br>
+  <input type="text" id="9" name="fname" value="{{ model_output[0][9] }}" maxlength="15"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Volume:</label><br>
+  <input type="text" id="10" name="fname" value="{{ model_output[0][10] }}" maxlength="5"</th>
+					<th><label for="fname">Issue:</label><br>
+  <input type="text" id="11" name="fname" value="{{ model_output[0][11] }}" maxlength="5"</th>
+					<th><label for="fname">Number:</label><br>
+  <input type="text" id="12" name="fname" value="{{ model_output[0][12] }}" maxlength="5"</th>
+					<th><label for="fname">Page Range:</label><br>
+  <input type="text" id="13" name="fname" value="{{ model_output[0][13] }}" maxlength="20"</th>
+					<th><label for="fname">Series Title:</label><br>
+  <input type="text" id="14" name="fname" value="{{ model_output[0][14] }}" maxlength="500"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Journal Abbreviation:</label><br>
+  <input type="text" id="15" name="fname" value="{{ model_output[0][15] }}" maxlength="15"</th>
+					<th><label for="fname">DOI:</label><br>
+  <input type="text" id="16" name="fname" value="{{ model_output[0][16] }}" maxlength="50"</th>
+					<th><label for="fname">ISBN/ISSN:</label><br>
+  <input type="text" id="17" name="fname" value="{{ model_output[0][17] }}" maxlength="50"</th>
+					<th><label for="fname">Url:</label><br>
+  <input type="text" id="18" name="fname" value="{{ model_output[0][18] }}" maxlength="100"</th>
+					<th><label for="fname">Accessed Date:</label><br>
+  <input type="text" id="19" name="fname" value="{{ model_output[0][19] }}" maxlength="15"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Place of Publication:</label><br>
+  <input type="text" id="20" name="fname" value="{{ model_output[0][20] }}" maxlength="100"</th>
+					<th><label for="fname">Publishing House:</label><br>
+  <input type="text" id="21" name="fname" value="{{ model_output[0][21] }}" maxlength="100"</th>
+					<th><label for="fname">Edition:</label><br>
+  <input type="text" id="22" name="fname" value="{{ model_output[0][22] }}" maxlength="10"</th>
+					<th><label for="fname">Publication Date:</label><br>
+  <input type="text" id="23" name="fname" value="{{ model_output[0][23] }}" maxlength="15"</th>
+					<th><label for="fname">Editor Name:</label><br>
+  <input type="text" id="24" name="fname" value="{{ model_output[0][24] }}" maxlength="100"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Editor First Name:</label><br>
+  <input type="text" id="25" name="fname" value="{{ model_output[0][25] }}" maxlength="100"</th>
+					<th><label for="fname">University:</label><br>
+  <input type="text" id="26" name="fname" value="{{ model_output[0][26] }}" maxlength="100"</th>
+					<th><label for="fname">Conference:</label><br>
+  <input type="text" id="27" name="fname" value="{{ model_output[0][27] }}" maxlength="200"</th>
+					<th><label for="fname">Database:</label><br>
+  <input type="text" id="28" name="fname" value="{{ model_output[0][28] }}" maxlength="200"</th>
+					<th><label for="fname">Supplementary Info:</label><br>
+  <input type="text" id="29" name="fname" value="{{ model_output[0][29] }}" maxlength="500"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Duration Minutes:</label><br>
+  <input type="text" id="30" name="fname" value="{{ model_output[0][30] }}" maxlength="10"</th>
+					<th><label for="pubtype">Type of Work:</label>
+						<select id="31" name="pubtype" class="select">
+						  <option value="0">Text</option>
+						  <option value="1">Artwork</option>
+						  <option value="2">Map</option>
+						  <option value="3">Photo</option>
+						  <option value="4">Other</option>
+						</select></th>
+  					<th><label for="fname">Version:</label><br>
+  <input type="text" id="32" name="fname" value="{{ model_output[0][32] }}" maxlength="20"</th>
+					<th><label for="pubtype">Media Support:</label>
+						<select id="33" name="pubtype" class="select">
+						  <option value="0">No selection</option>
+						  <option value="1">Blueray</option>
+						  <option value="2">USB</option>
+						  <option value="3">MCard</option>
+						  <option value="4">DVD</option>
+						  <option value="5">CD</option>
+						  <option value="6">CDRom</option>
+						  <option value="7">VHS</option>
+						  <option value="8">Tape</option>
+						  <option value="9">Record</option>
+						  <option value="10">MFilm</option>
+						  <option value="11">MFiche</option>
+						</select></th>
+						<th><label for="fname">Translator First Name:</label><br>
+  <input type="text" id="34" name="fname" value="{{ model_output[0][34] }}" maxlength="100"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Contributor1 First Name:</label><br>
+  <input type="text" id="35" name="fname" value="{{ model_output[0][35] }}" maxlength="100"</th>
+					<th><label for="fname">Cuntributor2 First Name:</label><br>
+  <input type="text" id="36" name="fname" value="{{ model_output[0][36] }}" maxlength="100"</th>
+					<th><label for="pubtype">Options:</label>
+						<select id="37" name="pubtype" class="select">
+						  <option value="0"></option>
+						  <option value="1"></option>
+						  <option value="2"></option>
+						  <option value="3"></option>
+						  <option value="4"></option>
+						  <option value="5"></option>
+						  <option value="6"></option>
+						</select></th>
+					<th><label for="pubtype">Capacity:</label>
+						<select id="38" name="pubtype" class="select">
+						  <option value="0">Author</option>
+						  <option value="1">Composer</option>
+						  <option value="2">Performer</option>
+						  <option value="3">Artist</option>
+						  <option value="4">Cartographer</option>
+						  <option value="5">Photographer</option>
+						  <option value="6">Script Writer</option>
+						</select></th>
+					<th><label for="fname">Translator Name:</label><br>
+  <input type="text" id="39" name="fname" value="{{ model_output[0][39] }}" maxlength="100"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Number of Volumes:</label><br>
+  <input type="text" id="40" name="fname" value="{{ model_output[0][40] }}" maxlength="20"</th>
+					<th><label for="fname">Multi Volume Number:</label><br>
+  <input type="text" id="41" name="fname" value="{{ model_output[0][41] }}" maxlength="20"</th>
+					<th><label for="fname">Series Volume:</label><br>
+  <input type="text" id="42" name="fname" value="{{ model_output[0][42] }}" maxlength="20"</th>
+					<th><label for="fname">Series Number:</label><br>
+  <input type="text" id="43" name="fname" value="{{ model_output[0][43] }}" maxlength="20"</th>
+					<th><label for="fname">Contributor2 Name:</label><br>
+  <input type="text" id="44" name="fname" value="{{ model_output[0][44] }}" maxlength="100"</th>
+				</tr>
+				<tr>
+					<th><label for="fname">Book:</label><br>
+  <input type="text" id="45" name="fname" value="{{ model_output[0][45] }}" maxlength="20"</th> 
+					<th><label for="fname">Multi Volume Name:</label><br>
+  <input type="text" id="46" name="fname" value="{{ model_output[0][46] }}" maxlength="500"</th>
+					<th><label for="fname">Contributor1 Name:</label><br>
+  <input type="text" id="47" name="fname" value="{{ model_output[0][47] }}" maxlength="100"</th>
+					<th><label for="fname">Place:</label><br>
+  <input type="text" id="48" name="fname" value="{{ model_output[0][48] }}" maxlength="100"</th>
+					<th><label for="fname">Total Number of Pages:</label><br>
+  <input type="text" id="49" name="fname" value="{{ model_output[0][49] }}" maxlength="20"</th>
+				</tr>
+				 <tr>
+					<th><label for="fname">Deposit Year Theses:</label><br>
+  <input type="text" id="50" name="fname" value="{{ model_output[0][50] }}" maxlength="20"</th>
+					<th><label for="fname">Scientific Discipline:</label><br>
+  <input type="text" id="51" name="fname" value="{{ model_output[0][51] }}" maxlength="100"</th>
+					<th><label for="fname">Updated Date:</label><br>
+  <input type="text" id="52" name="fname" value="{{ model_output[0][52] }}" maxlength="20"</th>
+					<th><input type="hidden" id="hid" name="hid"</th>
+				</tr>
+				 <tr>
+					<th class="box">
+						<input type="checkbox" id="box" class="box" name="box">
+					</th>
+					<th colspan="3" class="check_text">
+						<label for="box"> We would like to keep your corrected reference categories in order to enhance our training set, but if this does not suits you well please check the box, and we will not keep them.</label>
+					</th>
+					<th class="">
+					<button type="submit" class="btn fail" id="save_re" name="save_re">Save all references</button>
+					</th>
+				</tr>
+			</table>
+            </form>
+        </div>
+    </div>
+</body>
+{% endautoescape %}
+</html>

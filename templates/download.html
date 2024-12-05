@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>NER References</title>
+	
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link href="{{url_for('static', filename='css/bootstrapw.css') }}" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		
+	<style type="text/css">
+	</style>
+
+</head>
+
+<body>
+    <div class="container">
+		<div style="height: 167px;" class="row bannière-fond" id="Bannière">
+			<div style="height: 170px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="Texte">
+				<h3 style="color: white; font-family: Papyrus;" class="texte-bannière"><big>WhirlWriter</big></h3>
+				<p class="texte-bannière-p"><big><span style="color: white; font-family: Papyrus;">The Paper Writer Framework</span></big><br></p>
+			</div>
+		</div>
+		<div style="" class="navbar-default">
+			<button class="button" onclick=""><a class="navbar-brand" href="C:/Users/chrom/Documents/11-WhirlWriter/Website/default_index.html"><img src="{{url_for ('static', filename='./img/logo.png') }}" alt="Logo" class="vcenter" width="20"></a> 
+			</button>
+		</div>
+		<div>
+			<h1>Named Entity Recognition model <br>for the processing of scientific references.</h1><br>
+            <p><i>Please download your csv-file and the base-text if necessary.</i></p>
+		</div>
+		<br>
+        <div>
+			<table>
+				<tr>
+					<th  height="50" width="55%">
+						<input name="down" id="down"  value="Download CSV" type="button" onclick="downloadFunc()"></input> 
+					</th>
+					<th  height="50" width="55%">
+						<input name="down" id="down"  value="Download Base Text" type="button" onclick="downloadBase()"></input> 
+					</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<div class="ice2">
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+        </div>
+    </div>
+</body>
+
+<script src="{{ url_for('static',filename='scripts/script.js') }}"></script>
+{% endautoescape %}
+</html>

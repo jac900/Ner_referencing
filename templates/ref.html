@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>NER References</title>
+	
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link href="{{url_for('static', filename='css/bootstrapw.css') }}" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<style type="text/css">
+	</style>
+</head>
+
+<body>
+    <div class="container">
+		<div style="height: 167px;" class="row bannière-fond" id="Bannière">
+			<div style="height: 170px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="Texte">
+				<h3 style="color: white; font-family: Papyrus;" class="texte-bannière"><big>WhirlWriter</big></h3>
+				<p class="texte-bannière-p"><big><span style="color: white; font-family: Papyrus;">The Paper Writer Framework</span></big><br></p>
+			</div>
+		</div>
+		<div style="" class="navbar-default">
+			<button class="button" onclick=""><a class="navbar-brand" href="C:/Users/chrom/Documents/11-WhirlWriter/Website/default_index.html"><img src="{{url_for ('static', filename='./img/logo.png') }}" alt="Logo" class="vcenter" width="20"></a> 
+			</button>
+		</div>
+		<div class="top-half">
+			<h1>Named Entity Recognition model - NER <br>for the processing of scientific references.</h1>
+            <p><i>You can convert references to categories like author, title, publication year etc. and save them in csv-files. Use the input field  below to insert the references separated by line shifts. This is prototype, so it is still far from perfect, but you can correct the result before saving. </i></p>
+        </div>
+        <div class="bottom-half back">
+            <div class="bottom-input">
+                <div class="input-div">
+                    <form id="input-form" class="input-form" action="{{ url_for('predict')}}" method="post">
+						<table width=100%>
+							<tr>
+								<td>
+								<textarea id="inputtext" name="input_text" class="input-form" placeholder="Insert references! Max length 20000 characters." maxlength="20000"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<button type="submit" class="">Predict</button>
+								</td>
+							</tr>
+						</table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endautoescape %}
+</html>
