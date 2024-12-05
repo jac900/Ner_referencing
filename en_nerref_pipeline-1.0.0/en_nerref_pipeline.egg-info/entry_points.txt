@@ -1,2 +1,0 @@
-[spacy_models]
-en_nerref_pipeline = en_nerref_pipeline
