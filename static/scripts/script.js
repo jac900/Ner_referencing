@@ -1,8 +1,8 @@
 function downloadFunc() {
 
 	var element = document.createElement('a');
-	element.setAttribute('href', "../static/output/spacy_csv.csv");
-	element.setAttribute('download', "../static/output/spacy_csv.csv");
+	element.setAttribute('href', "../tmp/spacy_csv.csv");
+	element.setAttribute('download', "../tmp/spacy_csv.csv");
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
@@ -12,8 +12,8 @@ function downloadFunc() {
 function downloadBase() {
 	
 	var element = document.createElement('a');
-	element.setAttribute('href', "../static/output/base_text.csv");
-	element.setAttribute('download', "../static/output/base_text.csv");
+	element.setAttribute('href', "../tmp/base_text.csv");
+	element.setAttribute('download', "../tmp/base_text.csv");
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
