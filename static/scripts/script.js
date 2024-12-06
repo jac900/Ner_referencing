@@ -11,8 +11,8 @@ export function GET(request) {
 function downloadFunc() {
 	
 	var element = document.createElement('a');
-	element.setAttribute('href', file);
-	element.setAttribute('download', file);
+	element.setAttribute('href', GET(request));
+	element.setAttribute('download', GET(request));
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
