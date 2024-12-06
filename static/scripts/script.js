@@ -12,7 +12,7 @@ function downloadFunc() {
 	data.forEach(row => {
 	csvContent += row.join(',') + '\n'
 	});
-
+    console.log(csvContent)
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
 	const objUrl = URL.createObjectURL(blob);
 
