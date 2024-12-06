@@ -258,9 +258,9 @@ def save_pred():
 
     print("f", f)
 
-    file1 = request.files[process.cwd() + '/tmp/spacy_csv.csv']
-    print(file1.filename)
-    vercel_blob.put(file1.filename, file1.read(), {})
+    #file1 = request.files[process.cwd() + '/tmp/spacy_csv.csv']
+    #print(file1.filename)
+    #vercel_blob.put(file1.filename, file1.read(), {})
 
     btext = []
     for string in model_input:
@@ -276,9 +276,9 @@ def save_pred():
         write.writerow(["Base_Text"])
         write.writerows(btext)
 
-    file2 = request.files[process.cwd() + '/tmp/base_text.csv']
-    print(file2.filename)
-    vercel_blob.put(file2.filename, file2.read(), {})
+    #file2 = request.files[process.cwd() + '/tmp/base_text.csv']
+    #print(file2.filename)
+    #vercel_blob.put(file2.filename, file2.read(), {})
 
 
 
