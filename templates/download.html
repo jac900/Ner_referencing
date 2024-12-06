@@ -11,7 +11,6 @@
 	<link href="{{url_for('static', filename='css/bootstrapw.css') }}" rel="stylesheet">
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="{{ url_for('static',filename='scripts/script.js') }}"></script>
 	<script>
 	function downloadFunc() {
 	
@@ -82,7 +81,7 @@
 						<input name="down" id="down"  value="Download CSV" type="button" onclick="downloadFunc()"></input> 
 					</th>
 					<th  height="50" width="55%">
-						<input name="down" id="down"  value="Download Base Text" type="button" onclick="downloadBase()"></input> 
+						<input name="base" id="base"  value="Download Base Text" type="button" onclick="downloadBase()"></input> 
 					</th>
 				</tr>
 			</table>
