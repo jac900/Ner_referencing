@@ -8,11 +8,11 @@ function downloadFunc() {
 	
 	let csvContent = '';
     data = {{ csv_data|tojson }}
-
+    console.log('data', data);
 	data.forEach(row => {
 	csvContent += row.join(',') + '\n'
 	});
-    console.log(csvContent)
+    console.log('csvContent', csvContent);
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
 	const objUrl = URL.createObjectURL(blob);
 
