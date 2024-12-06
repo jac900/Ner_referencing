@@ -52,10 +52,10 @@
 		let field = "Base_Text"
 		
 		let csvContent = '';
-		csvContent += field.join(',') + '\n';
+		csvContent += field + '\n';
 		
 		bData.forEach(row => {
-		csvContent += row.join(',') + '\n'
+		csvContent += row + '\n'
 		});
 		
 		console.log('csvContent', csvContent);
