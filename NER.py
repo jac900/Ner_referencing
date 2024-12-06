@@ -258,7 +258,7 @@ def save_pred():
 
     print("f", f)
 
-    file1 = request.files['/tmp/spacy_csv.csv']
+    file1 = request.files[process.cwd() + '/tmp/spacy_csv.csv']
     print(file1.filename)
     vercel_blob.put(file1.filename, file1.read(), {})
 
@@ -276,7 +276,7 @@ def save_pred():
         write.writerow(["Base_Text"])
         write.writerows(btext)
 
-    file2 = request.files['/tmp/base_text.csv']
+    file2 = request.files[process.cwd() + '/tmp/base_text.csv']
     print(file2.filename)
     vercel_blob.put(file2.filename, file2.read(), {})
 
