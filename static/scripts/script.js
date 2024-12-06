@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 export function GET(request) {
-  let usersPath = path.join(process.cwd(), '/tmp/spacy_csv.csv');
+  let usersPath = path.join(process.cwd(), request);
   let file = fs.readFileSync(usersPath);
   return new Response(file);
 }
@@ -10,9 +10,11 @@ export function GET(request) {
 
 function downloadFunc() {
 	
+	file = GET('/tmp/spacy_csv.csv')
+	
 	var element = document.createElement('a');
-	element.setAttribute('href', GET(request));
-	element.setAttribute('download', GET(request));
+	element.setAttribute('href', file);
+	element.setAttribute('download', file);
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
