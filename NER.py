@@ -271,7 +271,7 @@ def save_pred():
     write.writerow(["Base_Text"])
     write.writerows(btext)
 	
-	file = request.files[base_text]
+    file = request.files[base_text]
     #print(file.filename)
     vercel_blob.put(file.filename, file.read(), {})
 	
