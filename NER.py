@@ -231,6 +231,7 @@ def save_pred():
     # retrieve global variables
     global model_input
     global model_output
+
     csv_data = []
     
     out_data = request.form['save_re']
