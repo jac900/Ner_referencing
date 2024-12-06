@@ -6,21 +6,22 @@ function downloadFunc() {
 	
 	#vercel_blob.download_file(spacy_csv, '/tmp/spacy_csv.csv')
 	
-	let csvContent = ''
+	let csvContent = '';
     data = {{ csv_data|tojson }}
 
 	data.forEach(row => {
 	csvContent += row.join(',') + '\n'
-	})
+	});
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' })
-	const objUrl = URL.createObjectURL(blob)
-	
-	const link = document.createElement('a')
-    link.setAttribute('href', objUrl)
-    link.setAttribute('download', 'File.csv')
-    link.textContent = 'Click to Download'
-	
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
+	const objUrl = URL.createObjectURL(blob);
+
+    var element = document.createElement('a');
+	element.setAttribute('href', objUrl);
+	element.setAttribute('download', 'spacy_csv.csv');
+	document.body.appendChild(element);
+	element.click();
+	document.body.removeChild(element);
 	
 
 }
