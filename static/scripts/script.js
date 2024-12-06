@@ -1,20 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 
-export function GET(request) {
-  let usersPath = path.join(process.cwd(), request);
-  let file = fs.readFileSync(usersPath);
-  return new Response(file);
-}
-
 
 function downloadFunc() {
 	
-	file = GET('/tmp/spacy_csv.csv')
+	vercel_blob.download_file(spacy_csv, '/tmp/spacy_csv.csv')
 	
 	var element = document.createElement('a');
-	element.setAttribute('href', file);
-	element.setAttribute('download', file);
+	element.setAttribute('href', '/tmp/spacy_csv.csv');
+	element.setAttribute('download', '/tmp/spacy_csv.csv');
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
@@ -23,13 +17,11 @@ function downloadFunc() {
 	
 function downloadBase() {
 	
-	let usersPath = path.join(process.cwd(), '/tmp/base_text.csv');
-    let file = fs.readFileSync(usersPath);
-
+    vercel_blob.download_file(base_text, '/tmp/base_text.csv')
 	
 	var element = document.createElement('a');
-	element.setAttribute('href', file);
-	element.setAttribute('download', file);
+	element.setAttribute('href', '/tmp/base_text.csv');
+	element.setAttribute('download', '/tmp/base_text.csv');
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
