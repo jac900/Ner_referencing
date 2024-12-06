@@ -40,6 +40,37 @@
 	
     function downloadBase() {
 		
+		let data = {{ model_input|tojson }};
+		let bData = [];
+		
+		for(let i=0;i<data.length;i++)
+		{
+			bData.push([data[i]]);
+		}
+		
+		let field = "Base_Text"
+		
+		let csvContent = '';
+		csvContent += field.join(',') + '\n';
+		console.log('data', data);
+		data.forEach(row => {
+		csvContent += row.join(',') + '\n'
+		});
+		console.log('csvContent', csvContent);
+		let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
+		let objUrl = URL.createObjectURL(blob);
+
+		let element = document.createElement('a');
+		element.setAttribute('href', objUrl);
+		element.setAttribute('download', 'base_text.csv');
+		document.body.appendChild(element);
+		element.click();
+		document.body.removeChild(element);
+		
+		
+		
+		
+		
 		var element = document.createElement('a');
 		element.setAttribute('href', '/tmp/base_text.csv');
 		element.setAttribute('download', '/tmp/base_text.csv');
