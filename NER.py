@@ -285,6 +285,8 @@ def save_pred():
         write.writerow(fields)
         write.writerows(csv_data) 
 
+    print("f", f)
+
     file1 = request.files['/tmp/spacy_csv.csv']
     print(file1.filename)
     vercel_blob.put(file1.filename, file1.read(), {})
