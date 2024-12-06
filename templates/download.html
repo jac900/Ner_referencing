@@ -14,8 +14,6 @@
 	</script>
 	<script>
 	function downloadFunc() {
-	
-		#vercel_blob.download_file(spacy_csv, '/tmp/spacy_csv.csv')
 		
 		let csvContent = '';
 		data = {{ csv_data|tojson }}
@@ -38,8 +36,6 @@
     }
 	
     function downloadBase() {
-	
-		#vercel_blob.download_file(base_text, '/tmp/base_text.csv')
 		
 		var element = document.createElement('a');
 		element.setAttribute('href', '/tmp/base_text.csv');
