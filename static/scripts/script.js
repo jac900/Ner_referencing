@@ -1,9 +1,17 @@
+import fs from 'fs';
+import path from 'path';
+
+
+
 
 function downloadFunc() {
+	
+	let usersPath = path.join(process.cwd(), '/tmp/spacy_csv.csv');
+    let file = fs.readFileSync(usersPath);
 
 	var element = document.createElement('a');
-	element.setAttribute('href', process.cwd() + "/spacy_csv.csv");
-	element.setAttribute('download', process.cwd() + "/spacy_csv.csv");
+	element.setAttribute('href', file);
+	element.setAttribute('download', file);
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
@@ -12,9 +20,13 @@ function downloadFunc() {
 	
 function downloadBase() {
 	
+	let usersPath = path.join(process.cwd(), '/tmp/base_text.csv');
+    let file = fs.readFileSync(usersPath);
+
+	
 	var element = document.createElement('a');
-	element.setAttribute('href', process.cwd() + "/base_text.csv");
-	element.setAttribute('download', process.cwd() + "/base_text.csv");
+	element.setAttribute('href', file);
+	element.setAttribute('download', file);
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
