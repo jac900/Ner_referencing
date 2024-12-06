@@ -4,7 +4,7 @@ import path from 'path';
 
 function downloadFunc() {
 	
-	vercel_blob.download_file(spacy_csv, '/tmp/spacy_csv.csv')
+	#vercel_blob.download_file(spacy_csv, '/tmp/spacy_csv.csv')
 	
 	var element = document.createElement('a');
 	element.setAttribute('href', '/tmp/spacy_csv.csv');
@@ -17,7 +17,7 @@ function downloadFunc() {
 	
 function downloadBase() {
 	
-    vercel_blob.download_file(base_text, '/tmp/base_text.csv')
+    #vercel_blob.download_file(base_text, '/tmp/base_text.csv')
 	
 	var element = document.createElement('a');
 	element.setAttribute('href', '/tmp/base_text.csv');

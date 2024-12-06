@@ -242,65 +242,8 @@ def save_pred():
 
     print("csv_data:", csv_data)
 
-    # field names 
-    fields = ['ID', 'TYPEOFPUBLICATION', 'TITLE', 'SHORTTITLE', 'AUTHORNAME', 'AUTHORFIRSTNAME', 'PUBLICATIONNAME', 'PUBLICATIONYEAR', 'FIRSTYEAROFPUBLICATION', 'MONTH', 'VOLUME', 'ISSUE', 'NUMBER', 'PAGERANGE', 'SERIESTITLE', 'JOURNALABBREVIATION', 'DOI', 'ISBN/ISSN', 'URL', 'ACCESSEDDATE', 'PLACEOFPUBLICATION', 'PUBLISHINGHOUSE', 'EDITION', 'PUBLICATIONDATE', 'EDITORNAME', 'EDITORFIRSTNAME', 'UNIVERSITY', 'CONFERENCE', 'DATABASE', 'INFOSUPPLEMENTARY', 'DURATIONMINUTES', 'TYPEOFWORK', 'VERSION', 'MEDIASUPPORT', 'TRANSLATORFIRSTNAME', 'CONTRIBUTOR1FIRSTNAME', 'CONTRIBUTOR2FIRSTNAME', 'OPTIONS', 'CAPACITY', 'TRANSLATORNAME', 'NUMBEROFVOLUMES', 'MULTIVOLUMENUMBER', 'SERIESVOLUME', 'SERIESNUMBER', 'CONTRIBUTOR2NAME', 'BOOK', 'MUTIVOLUMENAME', 'CONTRIBUTOR1NAME', 'PLACE', 'TOTALNUMBEROFPAGES', 'DEPOSITYEARTHESES', 'SCIENTIFICDISCIPLINE', 'UPDATEDDATE'] 
-
-
-    print('hello')
-
-    with open('/tmp/spacy_csv.csv', 'w', newline='') as f:
-         
-        # using csv.writer method from CSV package
-        write = csv.writer(f)
-         
-        write.writerow(fields)
-        write.writerows(csv_data) 
-
-    print("f", f)
-
-    #file1 = request.files[process.cwd() + '/tmp/spacy_csv.csv']
-    #print(file1.filename)
-    #vercel_blob.put(file1.filename, file1.read(), {})
-
-    btext = []
-    for string in model_input:
-        btext.append([string])
-
-    print(btext)
-
-    with open('/tmp/base_text.csv', 'w', newline='') as fb:
-         
-        # using csv.writer method from CSV package
-        write = csv.writer(fb)
-         
-        write.writerow(["Base_Text"])
-        write.writerows(btext)
-
-    #file2 = request.files[process.cwd() + '/tmp/base_text.csv']
-    #print(file2.filename)
-    #vercel_blob.put(file2.filename, file2.read(), {})
-
-
-
-    """
-    checked = request.form['hid']
-
-    print(checked)
-
-    if checked == 'false':
-
-        with open('./static/output/spacy_csv_acc.csv', 'a', newline='') as file:
-            write = csv.writer(file)
-            write.writerow(fields)
-            write.writerows(csv_data)
-
-        with open('./static/output/base_text_acc.csv', 'a', newline='') as fileb:
-            write = csv.writer(fileb)
-            write.writerow("Base Text")
-            write.writerows(model_input)
-    """
     # return download page
-    return render_template('download.html')
+    return render_template('download.html', csv_data = csv_data, model_input = model_input)
 
 if __name__ == "__main__":
     app.run(debug=True)
