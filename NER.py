@@ -244,7 +244,7 @@ def save_pred():
 
     # field names 
     fields = ['ID', 'TYPEOFPUBLICATION', 'TITLE', 'SHORTTITLE', 'AUTHORNAME', 'AUTHORFIRSTNAME', 'PUBLICATIONNAME', 'PUBLICATIONYEAR', 'FIRSTYEAROFPUBLICATION', 'MONTH', 'VOLUME', 'ISSUE', 'NUMBER', 'PAGERANGE', 'SERIESTITLE', 'JOURNALABBREVIATION', 'DOI', 'ISBN/ISSN', 'URL', 'ACCESSEDDATE', 'PLACEOFPUBLICATION', 'PUBLISHINGHOUSE', 'EDITION', 'PUBLICATIONDATE', 'EDITORNAME', 'EDITORFIRSTNAME', 'UNIVERSITY', 'CONFERENCE', 'DATABASE', 'INFOSUPPLEMENTARY', 'DURATIONMINUTES', 'TYPEOFWORK', 'VERSION', 'MEDIASUPPORT', 'TRANSLATORFIRSTNAME', 'CONTRIBUTOR1FIRSTNAME', 'CONTRIBUTOR2FIRSTNAME', 'OPTIONS', 'CAPACITY', 'TRANSLATORNAME', 'NUMBEROFVOLUMES', 'MULTIVOLUMENUMBER', 'SERIESVOLUME', 'SERIESNUMBER', 'CONTRIBUTOR2NAME', 'BOOK', 'MUTIVOLUMENAME', 'CONTRIBUTOR1NAME', 'PLACE', 'TOTALNUMBEROFPAGES', 'DEPOSITYEARTHESES', 'SCIENTIFICDISCIPLINE', 'UPDATEDDATE'] 
-
+    """
     spacy_csv = io.StringIO()
             
     # using csv.writer method from CSV package
@@ -274,9 +274,9 @@ def save_pred():
     file = request.files[base_text]
     #print(file.filename)
     vercel_blob.put(file.filename, file.read(), {})
-
-
     """
+
+
     with open('/tmp/spacy_csv.csv', 'w', newline='') as f:
          
         # using csv.writer method from CSV package
@@ -284,6 +284,10 @@ def save_pred():
          
         write.writerow(fields)
         write.writerows(csv_data) 
+
+    file1 = request.files['/tmp/spacy_csv.csv']
+    #print(file.filename)
+    vercel_blob.put(file.filename, file.read(), {})
 
     btext = []
     for string in model_input:
@@ -299,9 +303,15 @@ def save_pred():
         write.writerow(["Base_Text"])
         write.writerows(btext)
 
-    checked = request.form['hid']
-"""
+    file1 = request.files['/tmp/base_text.csv']
+    #print(file.filename)
+    vercel_blob.put(file.filename, file.read(), {})
+
+
+
     """
+    checked = request.form['hid']
+
     print(checked)
 
     if checked == 'false':
