@@ -254,7 +254,7 @@ def save_pred():
 
     if checked == 'false':
         
-		m_input = json.loads(model_input)
+        m_input = json.loads(model_input)
 
         save_dict = dict(list(m_input.items()) + list(out_data.items()))
 
