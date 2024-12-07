@@ -250,7 +250,7 @@ def save_pred():
     print("csv_data:", csv_data)
 
     # return download page
-    return render_template('download.html', csv_data = csv_data, btext = model_input)
+    return render_template('download.html', csv_data = csv_data, btext = btext)
 
 if __name__ == "__main__":
     app.run(debug=True)

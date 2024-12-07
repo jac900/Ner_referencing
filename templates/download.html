@@ -39,16 +39,10 @@
 	
     function downloadBase() {
 		
-		data = {{ model_input|tojson }};
+		data = {{ btext|tojson }};
 		console.log('data', data);
 		
-		let bData = [];
-		
-		for(let i=0;i<data.length;i++)
-		{
-			bData.push([data[i]]);
-		}
-		
+				
 		let field = "Base_Text"
 		
 		let csvContent = '';
