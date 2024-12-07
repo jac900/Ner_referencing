@@ -233,7 +233,9 @@ def save_pred():
     global model_output
 
     model_input = request.form['input']
-		
+    
+    model_input = json.loads(model_input)
+        
     csv_data = []
     
     out_data = request.form['save_re']
@@ -245,8 +247,20 @@ def save_pred():
 
     print("csv_data:", csv_data)
 
+    
+    checked = request.form['hid']
+
+    print(checked)
+    
+    var save_dict = {}
+
+    if checked == 'false':
+        
+        save_dict = dict(list(model_input.items()) + list(out_data.items()))
+
+
     # return download page
-    return render_template('download.html', csv_data = csv_data, model_input = model_input)
+    return render_template('download.html', csv_data = csv_data, model_input = model_input, save_dict = save_dict)
 
 if __name__ == "__main__":
     app.run(debug=True)

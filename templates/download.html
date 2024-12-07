@@ -13,6 +13,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
 	<script>
+	import { put } from "@vercel/blob";
+	
 	function downloadFunc() {
 	
 	    let fields = ['ID', 'TYPEOFPUBLICATION', 'TITLE', 'SHORTTITLE', 'AUTHORNAME', 'AUTHORFIRSTNAME', 'PUBLICATIONNAME', 'PUBLICATIONYEAR', 'FIRSTYEAROFPUBLICATION', 'MONTH', 'VOLUME', 'ISSUE', 'NUMBER', 'PAGERANGE', 'SERIESTITLE', 'JOURNALABBREVIATION', 'DOI', 'ISBN/ISSN', 'URL', 'ACCESSEDDATE', 'PLACEOFPUBLICATION', 'PUBLISHINGHOUSE', 'EDITION', 'PUBLICATIONDATE', 'EDITORNAME', 'EDITORFIRSTNAME', 'UNIVERSITY', 'CONFERENCE', 'DATABASE', 'INFOSUPPLEMENTARY', 'DURATIONMINUTES', 'TYPEOFWORK', 'VERSION', 'MEDIASUPPORT', 'TRANSLATORFIRSTNAME', 'CONTRIBUTOR1FIRSTNAME', 'CONTRIBUTOR2FIRSTNAME', 'OPTIONS', 'CAPACITY', 'TRANSLATORNAME', 'NUMBEROFVOLUMES', 'MULTIVOLUMENUMBER', 'SERIESVOLUME', 'SERIESNUMBER', 'CONTRIBUTOR2NAME', 'BOOK', 'MUTIVOLUMENAME', 'CONTRIBUTOR1NAME', 'PLACE', 'TOTALNUMBEROFPAGES', 'DEPOSITYEARTHESES', 'SCIENTIFICDISCIPLINE', 'UPDATEDDATE'];
@@ -65,9 +67,20 @@
 		element.click();
 		document.body.removeChild(element);
 		
-		
     }
 
+    window.onload = function save_references() {
+	
+	    var save_data = {{ save_dict|tojson }};
+		
+		if (save_data) {
+		
+		    const { refurl } = await put('references/blob.txt', save_data, { access: 'public' });
+		
+		}
+	
+	
+	}
 	</script>
 
 		
