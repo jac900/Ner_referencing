@@ -233,9 +233,9 @@ def save_pred():
     global model_output
 
     model_input = request.form['input']
-	
+	data = model_input.splitlines()
     btext = []
-    for string in model_input:
+    for string in data:
         btext.append([string])
 	
     csv_data = []
