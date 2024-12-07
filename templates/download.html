@@ -12,7 +12,7 @@
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
-	<script>
+	<script type="module">
 	import { put } from "@vercel/blob";
 	
 	const save_data = {{ save_dict|tojson }};
@@ -38,11 +38,11 @@
 		let csvContent = '';
 		csvContent += fields.join(',') + '\n';
 		data = {{ csv_data|tojson }}
-		console.log('data', data);
+
 		data.forEach(row => {
 		csvContent += row.join(',') + '\n'
 		});
-		console.log('csvContent', csvContent);
+
 		let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
 		let objUrl = URL.createObjectURL(blob);
 
@@ -58,7 +58,6 @@
     function downloadBase() {
 		
 		var data = {{ model_input|tojson }};
-		console.log('data', data);
 				
 		let field = "Base_Text"
 		
@@ -70,8 +69,6 @@
 		for  (var key in data) {
 		  csvContent += key + ': ' + data[key] + '\n'
 		}
-				
-		console.log('csvContent', csvContent);
 		
 		let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
 		let objUrl = URL.createObjectURL(blob);
