@@ -233,9 +233,7 @@ def save_pred():
     global model_output
 
     model_input = request.form['input']
-    
-    model_input = json.loads(model_input)
-        
+            
     csv_data = []
     
     out_data = request.form['save_re']
@@ -256,7 +254,9 @@ def save_pred():
 
     if checked == 'false':
         
-        save_dict = dict(list(model_input.items()) + list(out_data.items()))
+		m_input = json.loads(model_input)
+
+        save_dict = dict(list(m_input.items()) + list(out_data.items()))
 
 
     # return download page
