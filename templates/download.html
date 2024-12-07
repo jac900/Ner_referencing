@@ -41,17 +41,16 @@
 		
 		data = {{ model_input|tojson }};
 		console.log('data', data);
-		
 				
 		let field = "Base_Text"
 		
 		let csvContent = '';
 		csvContent += field + '\n';
 		
-		data.forEach(row => {
-		csvContent += row + '\n'
-		});
-		
+		Object.keys(data).forEach(function(key) {
+		  csvContent += key + ": " + value + '\n'
+		})
+				
 		console.log('csvContent', csvContent);
 		
 		let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
