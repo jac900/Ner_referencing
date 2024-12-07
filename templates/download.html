@@ -48,7 +48,7 @@
 		csvContent += field + '\n';
 		
 		Object.keys(data).forEach(function(key) {
-		  csvContent += key + ": " + value + '\n'
+		  csvContent += key + ": " + data[key] + '\n'
 		})
 				
 		console.log('csvContent', csvContent);
