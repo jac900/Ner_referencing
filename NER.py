@@ -252,7 +252,7 @@ def save_pred():
 
     print(checked)
     
-    var save_dict = {}
+    save_dict = {}
 
     if checked == 'false':
         
