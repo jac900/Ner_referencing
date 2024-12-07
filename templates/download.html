@@ -47,6 +47,8 @@
 		let csvContent = '';
 		csvContent += field + '\n';
 		
+		data = JSON.parse(data)
+		
 		for  (const key in data) {
 		  csvContent += key + ': ' + data[key] + '\n'
 		}
