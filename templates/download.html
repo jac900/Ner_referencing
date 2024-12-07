@@ -12,22 +12,7 @@
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
-	<script>
 	
-	const save_data = {{ save_dict|tojson }};
-	
-	window.onload = function save_references() {
-	
-		if (save_data) {
-		
-		    console.log('save_data', save_data);
-		    //const { url } = await put('references/blob.txt', save_data, { access: 'public' });
-		
-		}
-	
-	
-	};
-	</script>
 	<script>
 	import { put } from "@vercel/blob";
 	
