@@ -233,11 +233,7 @@ def save_pred():
     global model_output
 
     model_input = request.form['input']
-	#data = model_input.splitlines()
-    btext = []
-    for string in model_input:
-        btext.append([string])
-	
+		
     csv_data = []
     
     out_data = request.form['save_re']
@@ -250,7 +246,7 @@ def save_pred():
     print("csv_data:", csv_data)
 
     # return download page
-    return render_template('download.html', csv_data = csv_data, btext = btext)
+    return render_template('download.html', csv_data = csv_data, model_input = model_input)
 
 if __name__ == "__main__":
     app.run(debug=True)
