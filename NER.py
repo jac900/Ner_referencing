@@ -232,7 +232,7 @@ def save_pred():
     global model_input
     global model_output
 
-    print(model_input)
+    model_input = request.form['input']
 	
     csv_data = []
     

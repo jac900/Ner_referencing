@@ -74,6 +74,8 @@
 			
 			var x=$(".box").is(":checked");
 			document.getElementById("hid").value = JSON.stringify(x);
+			
+			document.getElementById("input").value = JSON.stringify(Object.assign({}, base_list));
     }
 		
 	</script>
@@ -92,7 +94,7 @@
 			</div>
 		</div>
 		<div style="" class="navbar-default">
-			<button class="button" onclick=""><a class="navbar-brand" href="https://whirlwriter.com/"><img src="{{url_for ('static', filename='./img/logo.png') }}" alt="Logo" class="vcenter" width="20"></a> 
+			<button class="button" onclick=""><a class="navbar-brand" href="C:/Users/chrom/Documents/11-WhirlWriter/Website/default_index.html"><img src="{{url_for ('static', filename='./img/logo.png') }}" alt="Logo" class="vcenter" width="20"></a> 
 			</button>
 		</div>
 		<div>
@@ -316,12 +318,13 @@
 					<th class="box">
 						<input type="checkbox" id="box" class="box" name="box">
 					</th>
-					<th colspan="3" class="check_text">
+					<th colspan="2" class="check_text">
 						<label for="box"> We would like to keep your corrected reference categories in order to enhance our training set, but if this does not suits you well please check the box, and we will not keep them.</label>
 					</th>
 					<th class="">
 					<button type="submit" class="btn fail" id="save_re" name="save_re">Save all references</button>
 					</th>
+					<th><input type="hidden" id="input" name="input"</th>
 				</tr>
 			</table>
             </form>
