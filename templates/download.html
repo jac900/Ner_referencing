@@ -39,7 +39,7 @@
 	
     function downloadBase() {
 		
-		const data = {{ model_input|tojson }};
+		var data = {{ model_input|tojson }};
 		console.log('data', data);
 				
 		let field = "Base_Text"
@@ -49,7 +49,7 @@
 		
 		data = JSON.parse(data)
 		
-		for  (const key in data) {
+		for  (var key in data) {
 		  csvContent += key + ': ' + data[key] + '\n'
 		}
 				
