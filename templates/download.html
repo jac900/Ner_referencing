@@ -48,7 +48,7 @@
 		csvContent += field + '\n';
 		
 		for  (const key in data) {
-		  csvContent += '${key}: ${data[key]}' + '\n'
+		  csvContent += key + ': ' + data[key] + '\n'
 		}
 				
 		console.log('csvContent', csvContent);
