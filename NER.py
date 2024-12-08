@@ -260,7 +260,7 @@ def save_pred():
         print('m_input', m_input)
 		
         list = []
-        for m, o in enumerate (m_input.values(), csv_data):
+        for m, o in zip(m_input.values(), out_data.values):
             collated = m + o
             list.append(collated)
 			
