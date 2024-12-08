@@ -266,7 +266,7 @@ def save_pred():
 		
         files = {'file': ('ref_save.txt', save_dict)}
 		
-        #file = request.files['ref_save.txt']
+        file = request.files['ref_save.txt']
         #print(file_save)
         #vercel_blob.put(file.filename, file.read(), {})
 
