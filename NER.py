@@ -245,7 +245,7 @@ def save_pred():
     for value in out_data.values():
         csv_data.append(value)
 
-    print("csv_data:", csv_data)
+    #print("csv_data:", csv_data)
     print("out_data:", out_data)
     
     checked = request.form['hid']
@@ -259,17 +259,15 @@ def save_pred():
         m_input = json.loads(model_input)
         print('m_input', m_input)
 		
-        list = []
-        for m, o in zip(m_input.values(), out_data.values()):
-            collated = ''.join(m).join(', ').join(o)
-            list.append(collated)
-			
-        save_dict = dict(list)
-		
-        save_dict = json.dumps(save_dict)
+        save_dict = defaultdict(list)
+        for d in (m_input, out_data):
+            for key, value in d.items():
+                save_dict[key].append(value)
 
         print(save_dict)
 		
+        save_dict = json.dumps(save_dict)
+
         files = {'file': ('ref_save.txt', save_dict)}
 		
         file = request.files['ref_save.txt']
