@@ -261,10 +261,12 @@ def save_pred():
         save_dict = dict(list(m_input.items()) + list(out_data.items()))
 		
         save_dict = json.dumps(save_dict)
+
         print(save_dict)
-        file_save = io.StringIO(save_dict)
 		
-        #file = request.files[file_save]
+        files = {'file': ('ref_save.txt', save_dict)}
+		
+        #file = request.files['ref_save.txt']
         #print(file_save)
         #vercel_blob.put(file.filename, file.read(), {})
 
