@@ -258,7 +258,7 @@ def save_pred():
         
         m_input = json.loads(model_input)
         print('m_input', m_input)
-        save_dict = dict(list(m_input.items()) + list(out_data.items()))
+        save_dict = dict(list(m_input.items().values()) + list(out_data.items()))
 		
         save_dict = json.dumps(save_dict)
 
