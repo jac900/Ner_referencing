@@ -274,7 +274,7 @@ def save_pred():
 		
         file = request.files['ref_save.txt']
         #print(file_save)
-        #vercel_blob.put(file.filename, file.read(), {})
+        vercel_blob.put(file.filename, file.read(), {})
 
 
     # return download page
