@@ -13,7 +13,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
 	<script type="module">
-	import { put } from "/node_modules/@vercel/blob";
+	
+	import express from 'express';
+	import { put } from '@vercel/blob';
 	
 	const save_data = {{ save_dict|tojson }};
 	
@@ -22,7 +24,22 @@
 		if (save_data) {
 		
 		    console.log('save_data', save_data);
-		    //const { url } = await put('references/blob.txt', save_data, { access: 'public' });
+		    
+			const app = express();
+
+			app.post('/upload', async (req, res) => {
+			  try {
+				const file = req.files.file; // Assuming you're using middleware like express-fileupload
+				const blob = await put("ref_data.txt", save_data, { access: 'public' });
+				res.json(blob);
+			  } catch (error) {
+				res.status(500).send('Error uploading file');
+			  }
+			});
+
+			app.listen(3000, () => {
+			  console.log('Server is running on port 3000');
+			});
 		
 		}
 	
