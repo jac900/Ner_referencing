@@ -6,6 +6,7 @@ import json
 import io
 import vercel_blob
 import pickle
+from collections import defaultdict
 
 #app initialization
 app = Flask(__name__, template_folder='./templates', static_folder='./static')
