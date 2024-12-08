@@ -258,7 +258,13 @@ def save_pred():
         
         m_input = json.loads(model_input)
         print('m_input', m_input)
-        save_dict = dict(list(m_input.values()) + list(out_data.values()))
+		
+		list = []
+		for m, o in enumerate (m_input.values(), out_data.values):
+			collated = m + o
+			list.append(collated)
+			
+        save_dict = dict(list)
 		
         save_dict = json.dumps(save_dict)
 
