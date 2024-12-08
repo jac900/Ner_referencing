@@ -246,7 +246,7 @@ def save_pred():
         csv_data.append(value)
 
     print("csv_data:", csv_data)
-
+    print("out_data:", out_data)
     
     checked = request.form['hid']
 
