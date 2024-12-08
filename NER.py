@@ -4,6 +4,8 @@ import spacy
 import csv
 import json
 import io
+import vercel_blob
+import pickle
 
 #app initialization
 app = Flask(__name__, template_folder='./templates', static_folder='./static')
@@ -257,6 +259,12 @@ def save_pred():
         m_input = json.loads(model_input)
 
         save_dict = dict(list(m_input.items()) + list(out_data.items()))
+		
+		ref_save = pickle.dumps(save_dict)
+		
+		file = request.files[ref_save]
+		print(file.filename)
+		vercel_blob.put(file.filename, file.read(), {})
 
 
     # return download page
