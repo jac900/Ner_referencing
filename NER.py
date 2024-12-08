@@ -262,9 +262,9 @@ def save_pred():
 		
         ref_save = pickle.dumps(save_dict)
 		
-        file = request.files[ref_save]
-        print(file.filename)
-        vercel_blob.put(file.filename, file.read(), {})
+        #file = request.files[ref_save]
+        #print(file.filename)
+        #vercel_blob.put(file.filename, file.read(), {})
 
 
     # return download page
