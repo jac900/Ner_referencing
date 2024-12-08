@@ -260,7 +260,7 @@ def save_pred():
 
         save_dict = dict(list(m_input.items()) + list(out_data.items()))
 		
-		save_dict = json.dumps(save_dict)
+        save_dict = json.dumps(save_dict)
 		
         file = io.StringIO(save_dict)
 		
