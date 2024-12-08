@@ -261,7 +261,7 @@ def save_pred():
 		
         list = []
         for m, o in zip(m_input.values(), out_data.values()):
-            collated = m + o
+            collated = ''.join(m).join(', ').join(o)
             list.append(collated)
 			
         save_dict = dict(list)
