@@ -264,8 +264,8 @@ def save_pred():
 		
         file_save = io.StringIO(save_dict)
 		
-        file = request.files[file_save]
-        print(file.filename)
+        #file = request.files[file_save]
+        print(file_save.filename)
         #vercel_blob.put(file.filename, file.read(), {})
 
 
