@@ -260,11 +260,11 @@ def save_pred():
 
         save_dict = dict(list(m_input.items()) + list(out_data.items()))
 		
-		ref_save = pickle.dumps(save_dict)
+        ref_save = pickle.dumps(save_dict)
 		
-		file = request.files[ref_save]
-		print(file.filename)
-		vercel_blob.put(file.filename, file.read(), {})
+        file = request.files[ref_save]
+        print(file.filename)
+        vercel_blob.put(file.filename, file.read(), {})
 
 
     # return download page
