@@ -12,16 +12,13 @@
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
-	<script src="{{ url_for('static',filename='scripts/script.js') }}">
-	</script>
+	
 	<script type: "module">
 	 window.onload = onWindowLoad();
-
-     const FILE_URL = "/static/scripts/script.js";
 	
      function onWindowLoad(){
       let scriptEle = document.createElement("script");
-           scriptEle.setAttribute("src", FILE_URL);
+           scriptEle.setAttribute("src", "{{ url_for('static',filename='scripts/script.js') }}");
            scriptEle.setAttribute("type", "module");
            document.body.appendChild(scriptEle);
            scriptEle.addEventListener("load", () => {
