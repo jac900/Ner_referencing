@@ -268,8 +268,11 @@ def save_pred():
         print(save_dict)
 		
         save_dict = json.dumps(save_dict)
+		
+        with open('/tmp/save_dict.txt', 'w') as f:
+            f.write(save_dict)
 
-        with open('save_dict.txt', save_dict) as f:
+        with open('/tmp/save_dict.txt', 'rb') as f:
             resp = vercel_blob.put('save_ref.txt', f.read())
 
         print(resp)
