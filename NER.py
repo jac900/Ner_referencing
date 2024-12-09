@@ -247,7 +247,7 @@ def save_pred():
         csv_data.append(value)
 
     #print("csv_data:", csv_data)
-    print("out_data:", out_data)
+    #print("out_data:", out_data)
     
     checked = request.form['hid']
 
@@ -258,7 +258,7 @@ def save_pred():
     if checked == 'false':
         
         m_input = json.loads(model_input)
-        print('m_input', m_input)
+        #print('m_input', m_input)
 		
         save_dict = defaultdict(list)
         for d in (m_input, out_data):
@@ -267,10 +267,10 @@ def save_pred():
 
         print(save_dict)
 		
-        save_dict = json.dumps(save_dict)
+        #save_dict = json.dumps(save_dict)
 
-        with open('/tmp/spacy.txt', 'w') as f:
-            f.write(save_dict)
+        #with open('/tmp/spacy.txt', 'w') as f:
+            #f.write(save_dict)
 		
         #file = request.files['/tmp/spacy.txt']
         #print(file_save)

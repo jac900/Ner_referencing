@@ -12,6 +12,8 @@
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
+	<script src="{{ url_for('static',filename='scripts/script.js') }}">
+	</script>
 	<script>
 		
 	function downloadFunc() {
@@ -73,7 +75,7 @@
 
 </head>
 
-<body>
+<body onload="uploadJson();">
     <div class="container">
 		<div style="height: 167px;" class="row bannière-fond" id="Bannière">
 			<div style="height: 170px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="Texte">
