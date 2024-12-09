@@ -14,10 +14,20 @@
 	</script>
 	<script src="{{ url_for('static',filename='scripts/script.js') }}">
 	</script>
-	<script type: module>
-	window.addEventListener('load', () => {
-      loadScript('{{ url_for('static',filename='scripts/script.js') }}')
-    })
+	<script>
+	 window.onload = onWindowLoad();
+
+     const FILE_URL = "{{ url_for('static',filename='scripts/script.js') }}";
+	
+     function onWindowLoad(){
+      let scriptEle = document.createElement("script");
+           scriptEle.setAttribute("src", FILE_URL);
+           scriptEle.setAttribute("type", "module");
+           document.body.appendChild(scriptEle);
+           scriptEle.addEventListener("load", () => {
+             console.log("File loaded")
+           });
+     };
 	</script>
 	<script>
 		
