@@ -269,9 +269,10 @@ def save_pred():
 		
         save_dict = json.dumps(save_dict)
 
-        files = {'file': ('ref_save.txt', save_dict)}
+        with open('/tmp/spacy.txt', 'w') as f:
+            f.write(save_dict)
 		
-        file = request.files['ref_save.txt']
+        file = request.files['/tmp/spacy.txt']
         #print(file_save)
         vercel_blob.put(file.filename, file.read(), {})
 
