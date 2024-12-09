@@ -14,10 +14,10 @@
 	</script>
 	<script src="{{ url_for('static',filename='scripts/script.js') }}">
 	</script>
-	<script>
+	<script type: "module">
 	 window.onload = onWindowLoad();
 
-     const FILE_URL = "{{ url_for('static',filename='scripts/script.js') }}";
+     const FILE_URL = "/static/scripts/script.js";
 	
      function onWindowLoad(){
       let scriptEle = document.createElement("script");
