@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 {% autoescape true %}
-
 <html>
 
 <head>
@@ -14,11 +12,10 @@
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
+	
+	
 	<script>
-
-    // Function create csv file from output data and opens the
-	// The download function
-
+		
 	function downloadFunc() {
 	
 	    let fields = ['ID', 'TYPEOFPUBLICATION', 'TITLE', 'SHORTTITLE', 'AUTHORNAME', 'AUTHORFIRSTNAME', 'PUBLICATIONNAME', 'PUBLICATIONYEAR', 'FIRSTYEAROFPUBLICATION', 'MONTH', 'VOLUME', 'ISSUE', 'NUMBER', 'PAGERANGE', 'SERIESTITLE', 'JOURNALABBREVIATION', 'DOI', 'ISBN/ISSN', 'URL', 'ACCESSEDDATE', 'PLACEOFPUBLICATION', 'PUBLISHINGHOUSE', 'EDITION', 'PUBLICATIONDATE', 'EDITORNAME', 'EDITORFIRSTNAME', 'UNIVERSITY', 'CONFERENCE', 'DATABASE', 'INFOSUPPLEMENTARY', 'DURATIONMINUTES', 'TYPEOFWORK', 'VERSION', 'MEDIASUPPORT', 'TRANSLATORFIRSTNAME', 'CONTRIBUTOR1FIRSTNAME', 'CONTRIBUTOR2FIRSTNAME', 'OPTIONS', 'CAPACITY', 'TRANSLATORNAME', 'NUMBEROFVOLUMES', 'MULTIVOLUMENUMBER', 'SERIESVOLUME', 'SERIESNUMBER', 'CONTRIBUTOR2NAME', 'BOOK', 'MUTIVOLUMENAME', 'CONTRIBUTOR1NAME', 'PLACE', 'TOTALNUMBEROFPAGES', 'DEPOSITYEARTHESES', 'SCIENTIFICDISCIPLINE', 'UPDATEDDATE'];
@@ -42,10 +39,7 @@
 		document.body.removeChild(element);
 
     }
-
-    // Function create csv file from input data and opens the
-	// The download function
-
+	
     function downloadBase() {
 		
 		var data = {{ model_input|tojson }};
@@ -75,6 +69,7 @@
 
 	</script>
 
+		
 	<style type="text/css">
 	</style>
 
@@ -130,8 +125,7 @@
     </div>
 </body>
 
-{% endautoescape 
-
+{% endautoescape %}
 </html>
 
     
