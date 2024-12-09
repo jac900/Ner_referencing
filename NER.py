@@ -1,12 +1,10 @@
-# app.py
+# NER.py
 from flask import Flask, render_template, request
+from collections import defaultdict
 import spacy
 import csv
 import json
-import io
 import vercel_blob
-import pickle
-from collections import defaultdict
 
 #app initialization
 app = Flask(__name__, template_folder='./templates', static_folder='./static')
@@ -20,9 +18,10 @@ model_output=""
 def home():
     return render_template('ref.html', display_mode="none")
 
-# route for prediction of sentiment analysis model and classifier
+# route for prediction of NER model
 @app.route('/predict', methods=['POST'])
 def predict():
+
     # retrieve global variables to store input and output
     global model_input
     global model_output
@@ -30,18 +29,19 @@ def predict():
     # get text from the incoming request (submitted on predict button click)
     data = request.form['input_text']
 
+    # Create list of of references
     references = data.splitlines()
 
-    #print(references)
     # load model
     nlp = spacy.load("en_nerref_pipeline-1.0.0")
 
+    # Rows list initialization
     rows = []
 
+    # Iterate over list of references
     for index, ref in enumerate(references):
 
-        print(index, ref)
-
+        # Variables for the NER categories
         typeofpublication = ""
         title = ""
         shorttitle = ""
@@ -94,15 +94,19 @@ def predict():
         deposityeartheses = ""
         scientificdiscipline = ""
         updateddate = ""
-        
+
+        # Apply model to each reference
         doc = nlp(ref)
+
+        # Id number is set to index
         id = index
-        
+
+        # Initialize list
         list = []
-        
+
+        # For each entity discovered in the reference
+        # attribute text to pertinent category variable
         for ent in doc.ents:
-            
-            #print(ent.text, ent.label_)
             
             match ent.label_:
                 case 'TITLE':
@@ -202,8 +206,12 @@ def predict():
                 case 'UPDATEDDATE': 
                     updateddate = ent.text       
 
+        # Type of publication is set to zero
+        # Type of publication is not detected by model,
+        # but can be modified later on
         typeofpublication = "0"
 
+        # Short title is created from title or publication name
         if title != "":
             if " " in title:
                 title_tokens = title.split(" ")
@@ -217,75 +225,71 @@ def predict():
             else:
                 shorttitle = publicationname
 
+        # Create list of categories for the reference
         list = [id, typeofpublication, title, shorttitle, authorname, authorfirstname, publicationname, publicationyear, firstyearofpublication, month, volume, issue, number, pagerange, seriestitle, journalabbreviation, doi, isbn_iss, url, accesseddate, placeofpublication, publishinghouse, edition, publicationdate, editorname, editorfirstname, university, conference, database, infosupplementary, durationminutes, typeofwork, version, mediasupport, translatorfirstname, contributor1firstname, contributor2firstname, options, capacity, translatorname, numberofvolumes, multivolumenumber, seriesvolume, seriesnumber, contributor2name, book, mutivolumename, contributor1name, place, totalnumberofpages, deposityeartheses, scientificdiscipline, updateddate] 
-        #print(list)
+
+        # List added to rows list
         rows.append(list)
-        
-    #print(rows)
     
     # store model input and output
     model_input = references
     model_output = rows
+
+    # Open result template where modifications and corrections are possible
     return render_template('result.html', model_output = model_output, model_input = model_input)
 
 # route for incremental training of model
 @app.route('/save_pred', methods=['POST'])
 def save_pred():
+
     # retrieve global variables
     global model_input
     global model_output
 
+    # Get input data from form
     model_input = request.form['input']
-            
+
+    # Initialize list
     csv_data = []
-    
+
+    # Get data modified or corrected from form
     out_data = request.form['save_re']
 
+    # Convert string to json dictionary
     out_data = json.loads(out_data)
-    
+
+    # Add out_data values to csv_data (list of lists)
     for value in out_data.values():
         csv_data.append(value)
 
-    #print("csv_data:", csv_data)
-    #print("out_data:", out_data)
-    
+    # Get check box value from form   
     checked = request.form['hid']
 
-    print(checked)
-    
+    # Initialize dictionary
     save_dict = {}
 
+    # If we are allowed to save the date to storage
     if checked == 'false':
-        
+
+        # Convert input string to json dictionary        
         m_input = json.loads(model_input)
-        #print('m_input', m_input)
-		
+
+        # Merge input dict and output dict to one dictionary		
         save_dict = defaultdict(list)
         for d in (m_input, out_data):
             for key, value in d.items():
                 save_dict[key].append(value)
 
-        print(save_dict)
-		
+        # Convert dictionary to string		
         save_dict = json.dumps(save_dict)
-		
+
+        # Create temporary file
         with open('/tmp/save_dict.txt', 'w') as f:
             f.write(save_dict)
 
+        # Write to blob storage
         with open('/tmp/save_dict.txt', 'rb') as f:
             resp = vercel_blob.put('save_ref.txt', f.read())
-
-        print(resp)
-		
-        
-
-        #with open('/tmp/spacy.txt', 'w') as f:
-            #f.write(save_dict)
-		
-        #file = request.files['/tmp/spacy.txt']
-        #print(file_save)
-        #vercel_blob.put(file.filename, file.read(), {})
-
 
     # return download page
     return render_template('download.html', csv_data = csv_data, model_input = model_input, save_dict = save_dict)

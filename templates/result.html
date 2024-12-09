@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 {% autoescape true %}
+
 <html>
 
 <head>
@@ -13,6 +15,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
 	<script>
+
+        // Create the number of options in the choose drop down
+		// menu coresponding to the number of references in output.
+		// This allows to browse through the references.
+
 		const result = {{ model_output|tojson }};
 		
 		window.onload = function() {
@@ -27,7 +34,12 @@
 			}
 		};
 	</script>
-	<script>	
+	<script>
+	
+        // Create event listener on the choose drop down menu
+		// detecting new choices made in the drop down menu
+		// in order to display the desired reference
+	
 		var out_list = {{ model_output|tojson }};
 		var base_list = {{ model_input|tojson }};
 		
@@ -56,27 +68,34 @@
 	
 	</script>
 	<script>
+	
+	    // This function saves the last displayed reference and
+		// saves all references in the form
+	
 		function saveFunc() {
 	
 			var ref_list = [];
 			
-			// Save changes to table
+			// Save changes to table in ref_list
 			for (let i = 0; i < 53; i++) {
 				var d = document.getElementById(i.toString()).value;
 				ref_list.push(d);
 			}
 
+            // Save reflist at pertinent index in outlist
 			var id = document.getElementById("0").value;
 			out_list[parseInt(id)] = ref_list;
-			
+
+            // Save modified list in form			
 			document.getElementById("save_re").value = JSON.stringify(Object.assign({}, out_list));
-			
+
+			// Save check box value in form
 			var x=$(".box").is(":checked");
 			document.getElementById("hid").value = JSON.stringify(x);
-			
+
+			// Save input value in form
 			document.getElementById("input").value = JSON.stringify(Object.assign({}, base_list));
 			
-			console.log('base_list', base_list);
     }
 		
 	</script>
@@ -100,7 +119,7 @@
 		</div>
 		<div>
 			<h1>Named Entity Recognition model <br>for the processing of scientific references.</h1><br>
-            <p><i>In the drop down menu Choose Reference you can choose the reference to correct. It is automatically saved when you move to another reference. When you have corrected all the references, press the button Save all References to save the elements to a csv-file. Do not forget to make choices in the drop down menus for Type of Publication, etc. which cannot be predicted.</i></p>
+            <p><i>In the drop down menu Choose Reference you can choose the reference to correct. It is automatically saved when you move to another reference. When you have corrected all the references, press the button Save all References to save the elements to a csv-file. Do not forget to make choices in the drop down menus for Type of Publication, etc. These fields are not being predicted.</i></p>
 		</div>
 		<br>
         <div class="ice">
