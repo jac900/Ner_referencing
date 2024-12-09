@@ -272,7 +272,7 @@ def save_pred():
         with open('/tmp/save_dict.txt', 'w') as f:
             f.write(save_dict)
 
-        with open('/tmp/save_dict.txt', 'ab') as f:
+        with open('/tmp/save_dict.txt', 'ab+') as f:
             resp = vercel_blob.put('save_ref.txt', f.read())
 
         print(resp)
